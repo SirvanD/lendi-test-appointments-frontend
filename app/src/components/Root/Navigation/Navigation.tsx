@@ -10,12 +10,16 @@ const Wrapper = styled.div`
   box-shadow: 1px 1px 1px #b8b8b8;
   margin-bottom: 48px;
 `;
+interface Props {
+  selectedApt: string;
+  brokerName: string;
+}
 
-const Navigation = () => {
+const Navigation = ({ selectedApt, brokerName }: Props) => {
   return (
     <Wrapper>
       <strong>
-        Currently selected appointment: [appointment date] with [broker name]
+        Currently selected appointment: {selectedApt} with {brokerName}
       </strong>
       <strong>Welcome to Lendi</strong>
     </Wrapper>
