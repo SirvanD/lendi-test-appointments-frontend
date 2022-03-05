@@ -39,7 +39,6 @@ const AppointmentSelect = ({
   setSelectedApt,
   selectedApt,
   setBrokerName,
-  brokerName,
 }: Props) => {
   const [brokerAppointments, setBrokerAppointments] =
     useState<BrokerAppointments>([]);
@@ -69,6 +68,19 @@ const AppointmentSelect = ({
     getData();
   }, []);
 
+  const handleApt = () => {
+    return brokerAppointments.map((app, id) => (
+      <Li key={id}>
+        {app.appointments?.map((apt: any) => {
+          if (apt.date == selectedApt) {
+            setBrokerName(app.name);
+            return ` Broker ID: ${apt.brokerId} Appointment Date: ${apt.date} `;
+          }
+        })}
+      </Li>
+    ));
+  };
+
   return (
     <Wrapper>
       <SideBar>
@@ -87,18 +99,7 @@ const AppointmentSelect = ({
       <div>
         <Heading>Appointment details</Heading>
         TODO: get appointment details when clicking on one from the left side
-        <ul>
-          {brokerAppointments.map((app, id) => (
-            <Li key={id}>
-              {app.appointments?.map((apt: any) => {
-                if (apt.date == selectedApt) {
-                  setBrokerName(app.name);
-                  return ` Broker ID: ${apt.brokerId} Appointment Date: ${apt.date} `;
-                }
-              })}
-            </Li>
-          ))}
-        </ul>
+        <ul>{handleApt()}</ul>
       </div>
     </Wrapper>
   );
